@@ -11,16 +11,16 @@ namespace Task4.Controllers
         }
 
         [HttpPost]
-        public IActionResult HandleRegister(string name, string email, string password, string repassword)
+        public IActionResult HandleRegister(string name, string email, string password, string repeatPassword)
         {
 
             HttpContext.Session.SetString("Name", name);
             HttpContext.Session.SetString("Email", email);
             HttpContext.Session.SetString("Password", password);
-            HttpContext.Session.SetString("RePassword", repassword);
+            HttpContext.Session.SetString("RePassword", repeatPassword);
 
 
-            if (password != repassword)
+            if (password != repeatPassword)
             {
                 TempData["MSG"] = "Password doesn't match";
                 return RedirectToAction("Register");
