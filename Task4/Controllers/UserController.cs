@@ -17,7 +17,7 @@ namespace Task4.Controllers
             HttpContext.Session.SetString("Name", name);
             HttpContext.Session.SetString("Email", email);
             HttpContext.Session.SetString("Password", password);
-            HttpContext.Session.SetString("RePassword", repeatPassword);
+            HttpContext.Session.SetString("repeatPassword", repeatPassword);
 
 
             if (password != repeatPassword)
