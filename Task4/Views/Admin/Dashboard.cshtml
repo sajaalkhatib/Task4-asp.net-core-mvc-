@@ -1,0 +1,33 @@
+﻿@{
+    ViewData["Title"] = "Index";
+    Layout = "AdminLayout";
+}
+
+@{
+    var users = new[]
+    {
+            new  { Name = "Saja", Age = 23, Email = "saja@example.com" },
+            new  { Name = "Baraa", Age = 22, Email = "Baraa@example.com" },
+            new  { Name = "Omar", Age = 25, Email = "omar@example.com" }
+    };
+}
+
+<table class="table table-striped">
+    <thead class="thead-dark">
+        <tr>
+            <th scope="col">Name</th>
+            <th scope="col">Age</th>
+            <th scope="col">Email</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var user in users)
+        {
+            <tr>
+                <td>@user.Name</td>
+                <td>@user.Age</td>
+                <td>@user.Email</td>
+            </tr>
+        }
+    </tbody>
+</table>

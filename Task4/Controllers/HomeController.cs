@@ -1,40 +1,33 @@
-using System.Diagnostics;
 using Microsoft.AspNetCore.Mvc;
-using Task4.Models;
 
-namespace Task4.Controllers
+namespace Task_4.Controllers
 {
     public class HomeController : Controller
     {
-        private readonly ILogger<HomeController> _logger;
-
-        public HomeController(ILogger<HomeController> logger)
-        {
-            _logger = logger;
-        }
-
         public IActionResult Index()
         {
-            var name = HttpContext.Session.GetString("Name") ?? "Guest";
-            ViewBag.Message = $"Welcome, {name}!";
+            var userName = HttpContext.Session.GetString("Name");
+
+            if (!string.IsNullOrEmpty(userName))
+            {
+                ViewBag.WelcomeMessage = $"Welcome, {userName}!";
+            }
+            else
+            {
+                ViewBag.WelcomeMessage = "Welcome, Guest!";
+            }
+
             return View();
-           
         }
-       
         public IActionResult Logout()
         {
-            return View();
+            foreach (var cookie in Request.Cookies.Keys)
+            {
+                Response.Cookies.Delete(cookie);
+            }
+
+            return RedirectToAction("Register", "User");
         }
 
-        public IActionResult Privacy()
-        {
-            return View();
-        }
-
-        [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
-        public IActionResult Error()
-        {
-            return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
-        }
     }
 }
